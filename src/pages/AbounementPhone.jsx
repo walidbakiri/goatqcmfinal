@@ -11,7 +11,7 @@ function AbounementPhone() {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
-      priceAbn: "4500 DA",
+      priceAbn: "3000 DA",
     },
     {
       nameAbn: "Externat Blida",
@@ -26,33 +26,10 @@ function AbounementPhone() {
     <>
       <div className={classes.cardfinal_phone}>
         <div className={`${classes.card_title_phone}`}>
-          <h2>Résidanat 2024</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1000</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
           <h2>Résidanat 2025</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4500</span>DA
+            <span>3000 Octobre</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -75,7 +52,7 @@ function AbounementPhone() {
           <h2>1ér Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1000</span>DA
+            <span>800 Octobre</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
