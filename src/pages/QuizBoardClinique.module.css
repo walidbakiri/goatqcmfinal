@@ -21,14 +21,14 @@
   background-color: var(--background-color);
 }
 .container_save_casclinique_timer {
-  margin-left: 950px;
+  margin-left: 900px;
   display: flex;
-  width: 380px;
+  width: 370px;
   height: 40px;
 }
 .full_save_casclinique {
   margin-top: 5px;
-  width: 160px;
+  width: 220px;
   height: 40px;
 }
 .save_quizz {
@@ -130,6 +130,9 @@
   margin-bottom: 5px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   border-radius: 8px;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
 .btnqcmclinique {
   width: 100%;
@@ -181,6 +184,9 @@
   color: var(--primary-text-color);
   background-color: var(--background-color);
   white-space: pre-line;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
 .propofeild {
   width: 100%;
@@ -216,8 +222,11 @@
   border: 1px solid rgb(192, 186, 186);
   padding: 3px;
   background-color: var(--background-color);
-  color: var(--primary-text-color);
+  color: var(--primary-text-color-propo);
   overflow: hidden;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
 .percentage {
   width: 50px;
@@ -662,6 +671,7 @@
   background-color: rgb(207, 209, 209);
   display: flex;
   padding-top: 7px;
+  height: 30px;
 }
 
 .btnPrecdent_phone {

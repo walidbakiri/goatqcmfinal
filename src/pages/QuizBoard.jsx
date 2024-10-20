@@ -93,7 +93,7 @@ function QuizBoard(props) {
   const VisibleNextBtn = useSignal(true);
   const VisiblePrevBtn = useSignal(false);
 
-  const COLORS = ["#fd5c63", "#50C878", "#FFC72C"];
+  const COLORS = ["#fd5c63", "#17B169", "#FFC72C"];
   const [TrueInsertClr, setTrueInsertClr] = useState("");
   const [TrueInsertClrClick, setTrueInsertClrClick] = useState("");
   let [TrueFullInsertClr, setTrueFullInsertClr] = useState(false);

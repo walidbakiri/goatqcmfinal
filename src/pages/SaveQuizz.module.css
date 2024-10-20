@@ -79,11 +79,101 @@
   height: 40px;
   color: var(--primary-text-color);
   border-radius: 5px;
+  display: flex;
+}
+.float_child_element {
+  float: left;
+}
+.quizzname {
+  height: 100px;
+  width: 180px;
+}
+.threedotsbtn {
+  height: 100px;
+  width: 55px;
+}
+.detail {
+  width: 120px;
+  height: 70px;
+  margin-left: 110px;
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: -180px;
+  color: var(--primary-text-color);
+  position: absolute;
+}
+.detail button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+/*cas clinique*********************************/
+.detail_clinique {
+  width: 120px;
+  height: 70px;
+  margin-left: 110px;
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: -180px;
+  color: var(--primary-text-color);
+  position: absolute;
+}
+.detail_clinique button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_clinique button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+
+/**********************************************/
+
+.popup {
+  z-index: 5;
+  width: 200px;
+  height: 200px;
 }
 .quizzcontent {
   width: 100%;
   height: 140px;
 }
+
 .quizzcontent img {
   width: 100%;
   height: 100%;
@@ -95,6 +185,7 @@
   border: 1px solid rgb(80, 80, 76);
   border-radius: 5px;
 }
+
 /*****phone****************************************************/
 .contanerspace_phone {
   position: absolute;

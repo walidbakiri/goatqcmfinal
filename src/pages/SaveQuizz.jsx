@@ -9,8 +9,13 @@ import useLocalStorage from "use-local-storage";
 import { useNavigate } from "react-router-dom";
 import backsave from "../compenent/layout/img/backsave.png";
 import { IoChevronDownOutline } from "react-icons/io5";
-
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { CiPlay1 } from "react-icons/ci";
+import ModalDetail from "./ModalDetail";
+import Backdrop from "./Backdrop";
 function SaveQuizz() {
+  const [modalDetalIsOpen, setModalDetalIsOpen] = useState(false);
+  const [showDivDeleteDetail, setShowDivDeleteDetail] = useState(false);
   const token = localStorage.getItem("tokengoat");
   const userIdToken = localStorage.getItem("userId");
   //******SideBare Change************************************* */
@@ -23,7 +28,8 @@ function SaveQuizz() {
   const [qcmsQuizz, setQcmsQuizz] = useState([]);
   const [casCliniqueQuizz, setCasCliniqueQuizz] = useState([]);
   const [QcmCasCliniqueQuizz, setQcmCasCliniqueQuizz] = useState([]);
-
+  const [detailQuizz, setDetailQuizz] = useState([]);
+  const [quizzIndex, setQuizzIndex] = useState(undefined);
   useEffect(() => {
     console.log(userIdToken);
     getAllQcmsSaves();
@@ -48,7 +54,7 @@ function SaveQuizz() {
     useState(false);
 
   //******************************************************************************* */
-
+  const [showDetailDiv, setShowDetailDiv] = useState(false);
   //****get qcms saves******************************************************** */
   const getAllQcmsSaves = async () => {
     const result = await axios.get(
@@ -108,20 +114,11 @@ function SaveQuizz() {
         SavePercentageAmount: JSON.parse(qcmsQuizz[index].savePercentageAmount),
         commingFrom: "savequizz",
         ExisteCasClinique: false,
-        //***end qcm***************************************************** */
-        /* checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
-        minMaxYearParSujetsFinal: minMaxYearParSujetsFinal.value,
-        QuizQcmQclinique: QuizQcmQclinique,    
-        ExisteCasClinique: ExisteCasClinique,
-        goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt:
-          goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt.value,
-        backFromCliniqueAllQcmCliniqueprSujet:
-          backFromCliniqueAllQcmCliniqueprSujet.value,
-        courId: SelectedCours[0],*/
       },
     });
   }
   //******************************************************************************* */
+
   //******handle quiz cas clinique div click****************************************** */
   function handleQuizCasClinique(casCliniqueQuizzId, index) {
     localStorage.setItem("qcmquizzid", casCliniqueQuizzId);
@@ -229,6 +226,34 @@ function SaveQuizz() {
     setShowQcmCasCliniqueQuizDiv(!showQcmCasCliniqueQuizDiv);
   };
   //******************************************************************************** */
+  function closeModalHandler() {
+    setModalDetalIsOpen(false);
+  }
+  //**handle delete quizz ********************************************************* */
+  const handleDeteQizzBtn = async (quizzId) => {
+    await axios.delete(`https://goatqcm-instance.com/qcmquizz/${quizzId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+  //******************************************************************************* */
+  //**handle delete quizz ********************************************************* */
+  const handleDeteQizzCliniqueBtn = async (quizzId) => {
+    await axios.delete(
+      `https://goatqcm-instance.com/cliniquequizz/${quizzId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  };
+  //******************************************************************************* */
+  //**handle delete quizz ********************************************************* */
+  const handleDeteQizzQcmQcasCliniqeBtn = async (quizzId) => {
+    await axios.delete(`https://goatqcm-instance.com/qcmsclinique/${quizzId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+  //******************************************************************************* */
+
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
@@ -244,19 +269,62 @@ function SaveQuizz() {
                 <div className={classes.fullquizzdiv_header}>QCM</div>
                 <div className={classes.fullquizzdiv_content}>
                   {qcmsQuizz.map((qcmQuizz, index) => (
-                    <div
-                      className={classes.quizzdiv}
-                      onClick={() => {
-                        handleQuizQcm(qcmQuizz.id, index);
-                      }}
-                    >
+                    <div className={classes.quizzdiv} key={qcmQuizz.id}>
                       <div className={classes.quizzdivheader}>
-                        {qcmQuizz.nameQcmQuizz}
+                        <div className={classes.float_child_element}>
+                          <div className={classes.quizzname}>
+                            {qcmQuizz.nameQcmQuizz}
+                          </div>
+                        </div>
+                        <div className={classes.float_child_element}>
+                          <div className={classes.threedotsbtn}>
+                            <CiPlay1
+                              style={{ width: 35, height: 25 }}
+                              onClick={() => {
+                                handleQuizQcm(qcmQuizz.id, index);
+                              }}
+                            />
+                            <BsThreeDotsVertical
+                              onClick={() => {
+                                quizzIndex === qcmQuizz.id
+                                  ? setQuizzIndex(undefined)
+                                  : setQuizzIndex(qcmQuizz.id);
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                       <div className={classes.quizzcontent}>
                         <img src={backsave} />
                       </div>
                       <div className={classes.quizzdivfooter}></div>
+                      <div
+                        className={classes.quizzdiv_container}
+                        key={qcmQuizz.id}
+                      >
+                        {qcmQuizz.id === quizzIndex && (
+                          <div className={classes.detail}>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                handleDeteQizzBtn(qcmQuizz.id);
+                              }}
+                            >
+                              Delete
+                            </button>
+                            <hr className={`${classes.hr_desk} `} />
+                            <button
+                              onClick={() => {
+                                setModalDetalIsOpen(true);
+                                console.log(qcmQuizz);
+                                setDetailQuizz(qcmQuizz);
+                              }}
+                            >
+                              Détail
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -264,20 +332,67 @@ function SaveQuizz() {
               <div className={classes.fullquizzdiv}>
                 <div className={classes.fullquizzdiv_header}>Cas Clinique</div>
                 <div className={classes.fullquizzdiv_content}>
-                  {casCliniqueQuizz.map((casClinique, index) => (
-                    <div
-                      className={classes.quizzdiv}
-                      onClick={() => {
-                        handleQuizCasClinique(casClinique.id, index);
-                      }}
-                    >
+                  {casCliniqueQuizz.map((quizzCasClinique, indexClinique) => (
+                    <div className={classes.quizzdiv} key={quizzCasClinique.id}>
                       <div className={classes.quizzdivheader}>
-                        {casClinique.nameCasCliniqueQuizz}
+                        <div className={classes.float_child_element}>
+                          <div className={classes.quizzname}>
+                            {quizzCasClinique.nameCasCliniqueQuizz}
+                          </div>
+                        </div>
+                        <div className={classes.float_child_element}>
+                          <div className={classes.threedotsbtn}>
+                            <CiPlay1
+                              style={{ width: 35, height: 25 }}
+                              onClick={() => {
+                                handleQuizCasClinique(
+                                  quizzCasClinique.id,
+                                  indexClinique
+                                );
+                              }}
+                            />
+                            <BsThreeDotsVertical
+                              onClick={() => {
+                                quizzIndex === quizzCasClinique.id
+                                  ? setQuizzIndex(undefined)
+                                  : setQuizzIndex(quizzCasClinique.id);
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
+
                       <div className={classes.quizzcontent}>
                         <img src={backsave} />
                       </div>
                       <div className={classes.quizzdivfooter}></div>
+                      <div
+                        className={classes.quizzdiv_container_clinique}
+                        key={quizzCasClinique.id}
+                      >
+                        {quizzCasClinique.id === quizzIndex && (
+                          <div className={classes.detail_clinique}>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                handleDeteQizzCliniqueBtn(quizzCasClinique.id);
+                              }}
+                            >
+                              Delete
+                            </button>
+                            <hr className={`${classes.hr_desk} `} />
+                            <button
+                              onClick={() => {
+                                setModalDetalIsOpen(true);
+
+                                setDetailQuizz(quizzCasClinique);
+                              }}
+                            >
+                              Détail
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -289,19 +404,68 @@ function SaveQuizz() {
                 </div>
                 <div className={classes.fullquizzdiv_content}>
                   {QcmCasCliniqueQuizz.map((QcmCasClinique, index) => (
-                    <div
-                      className={classes.quizzdiv}
-                      onClick={() => {
-                        handleQuizQcmCasClinique(QcmCasClinique.id, index);
-                      }}
-                    >
+                    <div className={classes.quizzdiv} key={QcmCasClinique.id}>
                       <div className={classes.quizzdivheader}>
-                        {QcmCasClinique.nameQcmCasCliniqueQuizz}
+                        <div className={classes.float_child_element}>
+                          <div className={classes.quizzname}>
+                            {QcmCasClinique.nameQcmCasCliniqueQuizz}
+                          </div>
+                        </div>
+                        <div className={classes.float_child_element}>
+                          <div className={classes.threedotsbtn}>
+                            <CiPlay1
+                              style={{ width: 35, height: 25 }}
+                              onClick={() => {
+                                handleQuizQcmCasClinique(
+                                  QcmCasClinique.id,
+                                  index
+                                );
+                              }}
+                            />
+                            <BsThreeDotsVertical
+                              onClick={() => {
+                                quizzIndex === QcmCasClinique.id
+                                  ? setQuizzIndex(undefined)
+                                  : setQuizzIndex(QcmCasClinique.id);
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
+
                       <div className={classes.quizzcontent}>
                         <img src={backsave} />
                       </div>
                       <div className={classes.quizzdivfooter}></div>
+                      <div
+                        className={classes.quizzdiv_container}
+                        key={QcmCasClinique.id}
+                      >
+                        {QcmCasClinique.id === quizzIndex && (
+                          <div className={classes.detail}>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                handleDeteQizzQcmQcasCliniqeBtn(
+                                  QcmCasClinique.id
+                                );
+                              }}
+                            >
+                              Delete
+                            </button>
+                            <hr className={`${classes.hr_desk} `} />
+                            <button
+                              onClick={() => {
+                                setModalDetalIsOpen(true);
+
+                                setDetailQuizz(QcmCasClinique);
+                              }}
+                            >
+                              Détail
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -309,6 +473,7 @@ function SaveQuizz() {
             </div>
           </div>
         )}
+
         {isTabletOrMobile && (
           <div
             className={classes.contanerspace_phone}
@@ -426,6 +591,12 @@ function SaveQuizz() {
           </div>
         )}
       </div>
+      {isDesktopOrLaptop && modalDetalIsOpen && (
+        <ModalDetail onCancel={closeModalHandler} detailQuizz={detailQuizz} />
+      )}
+      {isDesktopOrLaptop && modalDetalIsOpen && (
+        <Backdrop onCancel={closeModalHandler} />
+      )}
     </>
   );
 }

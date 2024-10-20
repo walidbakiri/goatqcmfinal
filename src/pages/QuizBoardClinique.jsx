@@ -80,7 +80,7 @@ function QuizBoardClinique(props) {
   const VisibleNextBtn = useSignal(true);
   const VisiblePrevBtn = useSignal(false);
   let [SelectIndex, setSelectIndex] = useState(-1);
-  const COLORS = ["#fd5c63", "#50C878"];
+  const COLORS = ["#fd5c63", "#17B169"];
   const [backGroundBtn, setBackGroundBtn] = useState("#F0F0F0");
   const [TrueInsertClr, setTrueInsertClr] = useState("");
   const [TrueInsertClrClick, setTrueInsertClrClick] = useState("");

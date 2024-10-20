@@ -237,7 +237,12 @@
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   white-space: pre-line;
   border-radius: 8px;
+
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
+
 .nmbrqcm {
   width: 140px;
 }
@@ -252,12 +257,15 @@
 }
 .ulpropo li {
   background-color: var(--background-color);
-  color: var(--primary-text-color);
+  color: var(--primary-text-color-propo);
   height: auto;
   border: 1px solid rgb(192, 186, 186);
   padding: 3px;
 
   overflow: hidden;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
 .percentage {
   width: 50px;

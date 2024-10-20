@@ -325,6 +325,7 @@
   --primary-text-color-info: #252424;
   --primary-text-color: #252424;
   --secondary-text-color: #f6f6f6;
+  --primary-text-color-propo: #252424;
   --toggle-bg: #f6f6f6;
   --toggle-fg: #eefa4c;
 }
@@ -333,7 +334,8 @@
   --background-color: #181818;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #e99653;
-  --primary-text-color: #c5c5c5;
+  --primary-text-color: #cccccc;
+  --primary-text-color-propo: #ddd8d8;
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #070707;
   --toggle-fg: #17a9ec;

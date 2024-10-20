@@ -31,6 +31,9 @@
   white-space: pre-line;
   height: auto;
   padding: 10px;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
 }
 /************phone **************************/
 .desccontainer_phone {
@@ -51,10 +54,15 @@
   padding: 20px;
 }
 .carddesc_phone {
-  font-size: 13px;
+  border-radius: 3px;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
   height: auto;
   margin-top: 5px;
   white-space: pre-line;
   height: auto;
   padding: 10px;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
 }
