@@ -496,19 +496,63 @@ function SaveQuizz() {
                 {showQcmQuizDiv && (
                   <div className={classes.fullquizzdiv_content_phone}>
                     {qcmsQuizz.map((qcmQuizz, index) => (
-                      <div
-                        className={classes.quizzdiv_phone}
-                        onClick={() => {
-                          handleQuizQcm(qcmQuizz.id, index);
-                        }}
-                      >
+                      <div className={classes.quizzdiv_phone}>
                         <div className={classes.quizzdivheader_phone}>
-                          {qcmQuizz.nameQcmQuizz}
+                          <div className={classes.float_child_element_phone}>
+                            <div className={classes.quizzname_phone}>
+                              {qcmQuizz.nameQcmQuizz}
+                            </div>
+                          </div>
+                          <div className={classes.float_child_element_phone}>
+                            <div className={classes.threedotsbtn_phone}>
+                              <CiPlay1
+                                style={{ width: 15, height: 15 }}
+                                onClick={() => {
+                                  handleQuizQcm(qcmQuizz.id, index);
+                                }}
+                              />
+                              <BsThreeDotsVertical
+                                style={{ width: 15, height: 15 }}
+                                onClick={() => {
+                                  quizzIndex === qcmQuizz.id
+                                    ? setQuizzIndex(undefined)
+                                    : setQuizzIndex(qcmQuizz.id);
+                                }}
+                              />
+                            </div>
+                          </div>
                         </div>
                         <div className={classes.quizzcontent_phone}>
                           <img src={backsave} />
                         </div>
                         <div className={classes.quizzdivfooter_phone}></div>
+                        <div
+                          className={classes.quizzdiv_container_phone}
+                          key={qcmQuizz.id}
+                        >
+                          {qcmQuizz.id === quizzIndex && (
+                            <div className={classes.detail_phone}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  handleDeteQizzBtn(qcmQuizz.id);
+                                }}
+                              >
+                                Delete
+                              </button>
+                              <hr className={`${classes.hr_desk_phone} `} />
+                              <button
+                                onClick={() => {
+                                  setModalDetalIsOpen(true);
+                                  console.log(qcmQuizz);
+                                  setDetailQuizz(qcmQuizz);
+                                }}
+                              >
+                                Détail
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -529,20 +573,73 @@ function SaveQuizz() {
                 </div>
                 {showCasCliniqueQuizDiv && (
                   <div className={classes.fullquizzdiv_content_phone}>
-                    {casCliniqueQuizz.map((casclinique, index) => (
+                    {casCliniqueQuizz.map((quizzCasClinique, indexClinique) => (
                       <div
                         className={classes.quizzdiv_phone}
-                        onClick={() => {
-                          handleQuizCasClinique(casclinique.id, index);
-                        }}
+                        key={quizzCasClinique.id}
                       >
                         <div className={classes.quizzdivheader_phone}>
-                          {casclinique.nameCasCliniqueQuizz}
+                          <div className={classes.float_child_element_phone}>
+                            <div className={classes.quizzname_phone}>
+                              {quizzCasClinique.nameCasCliniqueQuizz}
+                            </div>
+                          </div>
+                          <div className={classes.float_child_element_phone}>
+                            <div className={classes.threedotsbtn_phone}>
+                              <CiPlay1
+                                style={{ width: 15, height: 15 }}
+                                onClick={() => {
+                                  handleQuizCasClinique(
+                                    quizzCasClinique.id,
+                                    indexClinique
+                                  );
+                                }}
+                              />
+                              <BsThreeDotsVertical
+                                style={{ width: 15, height: 15 }}
+                                onClick={() => {
+                                  quizzIndex === quizzCasClinique.id
+                                    ? setQuizzIndex(undefined)
+                                    : setQuizzIndex(quizzCasClinique.id);
+                                }}
+                              />
+                            </div>
+                          </div>
                         </div>
+
                         <div className={classes.quizzcontent_phone}>
                           <img src={backsave} />
                         </div>
                         <div className={classes.quizzdivfooter_phone}></div>
+                        <div
+                          className={classes.quizzdiv_container_clinique_phone}
+                          key={quizzCasClinique.id}
+                        >
+                          {quizzCasClinique.id === quizzIndex && (
+                            <div className={classes.detail_clinique_phone}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  handleDeteQizzCliniqueBtn(
+                                    quizzCasClinique.id
+                                  );
+                                }}
+                              >
+                                Delete
+                              </button>
+                              <hr className={`${classes.hr_desk_phone} `} />
+                              <button
+                                onClick={() => {
+                                  setModalDetalIsOpen(true);
+
+                                  setDetailQuizz(quizzCasClinique);
+                                }}
+                              >
+                                Détail
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -565,23 +662,73 @@ function SaveQuizz() {
                 </div>
                 {showQcmCasCliniqueQuizDiv && (
                   <div className={classes.fullquizzdiv_content_phone}>
-                    {QcmCasCliniqueQuizz.map((qcmCasCliniqueQuizz, index) => (
+                    {QcmCasCliniqueQuizz.map((QcmCasClinique, index) => (
                       <div
                         className={classes.quizzdiv_phone}
-                        onClick={() => {
-                          handleQuizQcmCasClinique(
-                            qcmCasCliniqueQuizz.id,
-                            index
-                          );
-                        }}
+                        key={QcmCasClinique.id}
                       >
                         <div className={classes.quizzdivheader_phone}>
-                          {qcmCasCliniqueQuizz.nameQcmCasCliniqueQuizz}
+                          <div className={classes.float_child_element_phone}>
+                            <div className={classes.quizzname_phone}>
+                              {QcmCasClinique.nameQcmCasCliniqueQuizz}
+                            </div>
+                          </div>
+                          <div className={classes.float_child_element_phone}>
+                            <div className={classes.threedotsbtn_phone}>
+                              <CiPlay1
+                                style={{ width: 15, height: 15 }}
+                                onClick={() => {
+                                  handleQuizQcmCasClinique(
+                                    QcmCasClinique.id,
+                                    index
+                                  );
+                                }}
+                              />
+                              <BsThreeDotsVertical
+                                style={{ width: 15, height: 15 }}
+                                onClick={() => {
+                                  quizzIndex === QcmCasClinique.id
+                                    ? setQuizzIndex(undefined)
+                                    : setQuizzIndex(QcmCasClinique.id);
+                                }}
+                              />
+                            </div>
+                          </div>
                         </div>
+
                         <div className={classes.quizzcontent_phone}>
                           <img src={backsave} />
                         </div>
                         <div className={classes.quizzdivfooter_phone}></div>
+                        <div
+                          className={classes.quizzdiv_container_phone}
+                          key={QcmCasClinique.id}
+                        >
+                          {QcmCasClinique.id === quizzIndex && (
+                            <div className={classes.detail_phone}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  handleDeteQizzQcmQcasCliniqeBtn(
+                                    QcmCasClinique.id
+                                  );
+                                }}
+                              >
+                                Delete
+                              </button>
+                              <hr className={`${classes.hr_desk_phone} `} />
+                              <button
+                                onClick={() => {
+                                  setModalDetalIsOpen(true);
+
+                                  setDetailQuizz(QcmCasClinique);
+                                }}
+                              >
+                                Détail
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
