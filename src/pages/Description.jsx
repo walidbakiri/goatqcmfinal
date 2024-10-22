@@ -7,7 +7,9 @@ import UserService from "../compenent/layout/service/UserService";
 import { useSignal } from "@preact/signals-react";
 function Description(props) {
   //******************************************************************* */
-
+  const disableCopyPaste = (e) => {
+    e.preventDefault();
+  };
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
   });
@@ -86,7 +88,15 @@ function Description(props) {
               </div>
             )}
             {displayDesc && (
-              <div className={`${classes.carddesc} table-hover  `}>
+              <div
+                onCopy={disableCopyPaste}
+                onCut={disableCopyPaste}
+                onPaste={disableCopyPaste}
+                style={{
+                  userSelect: "none",
+                }}
+                className={`${classes.carddesc} table-hover  `}
+              >
                 <p className="card-text">{FullDescription.qcmDescription}</p>
               </div>
             )}
@@ -101,7 +111,15 @@ function Description(props) {
             </div>
           )}
           {displayDesc && (
-            <div className={`${classes.carddesc_phone} table-hover  `}>
+            <div
+              onCopy={disableCopyPaste}
+              onCut={disableCopyPaste}
+              onPaste={disableCopyPaste}
+              style={{
+                userSelect: "none",
+              }}
+              className={`${classes.carddesc_phone} table-hover  `}
+            >
               <p className="card-text">{FullDescription.qcmDescription}</p>
             </div>
           )}
